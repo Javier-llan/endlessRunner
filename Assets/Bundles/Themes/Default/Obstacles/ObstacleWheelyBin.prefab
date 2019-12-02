@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 111000011928761108}
   - component: {fileID: 65000011088392444}
   - component: {fileID: 82000012813547318}
+  - component: {fileID: 114054589250542066}
   m_Layer: 9
   m_Name: ObstacleWheelyBin
   m_TagString: Obstacle
@@ -365,3 +366,14 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114054589250542066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013234899880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88973485cdadb934b8eaf8dbd0998447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -7,18 +7,42 @@ public class Track : MonoBehaviour {
     public GameObject[] obstacles;
     public Vector2 numberOfObstacles;
     public List<GameObject> newObstacles;
+    public GameObject coin;
+    public Vector2 numberOfCoins;
+    public List<GameObject> newCoins;
 
 	// Use this for initialization
 	void Start () {
         int newNumberOfObstacles = (int)Random.Range(numberOfObstacles.x, numberOfObstacles.y);
+        int newNumeberOfCoins = (int)Random.Range(numberOfCoins.x, numberOfCoins.y);
+
         for (int i = 0; i < newNumberOfObstacles; i++)
         {
             newObstacles.Add(Instantiate(obstacles[Random.Range(0, obstacles.Length)], transform));
             newObstacles[i].SetActive(false);
         }
+
+        for(int i = 0; i < newNumeberOfCoins; i++)
+        {
+            newCoins.Add(Instantiate(coin, transform));
+            newCoins[i].SetActive(false);
+        }
         PositionateObstacles();
+        PositionateCoins();
     }
-	
+	void PositionateCoins()
+    {
+        float minZPos = 10f;
+        for(int i = 0; i < newCoins.Count; i++)
+        {
+            float maxZPos = minZPos + 5f;
+            float randomZPos = Random.Range(minZPos, maxZPos);
+            newCoins[i].transform.localPosition = new Vector3(transform.position.x, transform.position.y, randomZPos);
+            newCoins[i].SetActive(true);
+            newCoins[i].GetComponent<ChangeLane>().PositionLane();
+            minZPos = randomZPos + 1;
+        }
+    }
 	void PositionateObstacles()
     {
         for(int i = 0; i < newObstacles.Count; i++)
@@ -27,6 +51,9 @@ public class Track : MonoBehaviour {
             float poZMax = (296f / newObstacles.Count) + (296f / newObstacles.Count) * i+1;
             newObstacles[i].transform.localPosition = new Vector3(0, 0, Random.Range(poZMin, poZMax));
             newObstacles[i].SetActive(true);
+            if (newObstacles[i].GetComponent<ChangeLane>() != null)
+                newObstacles[i].GetComponent<ChangeLane>().PositionLane();
+
         }
     }
 
@@ -35,7 +62,8 @@ public class Track : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             transform.position = new Vector3(0, 0, transform.position.z + 296 * 2);
-            Invoke("PositionateObstacles",4f);
+            PositionateObstacles();
+            PositionateCoins();
         }
     }
 

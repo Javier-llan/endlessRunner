@@ -30,6 +30,7 @@ public class Player : MonoBehaviour {
     private bool invincible = false;
     static int blinkingValue;
     private UIManager uiManager;
+    private int coins;
 
     // Use this for initialization
     void Start()
@@ -142,6 +143,13 @@ public class Player : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Coin"))
+        {
+            coins++;
+            uiManager.UpdateCoins(coins);
+            other.transform.parent.gameObject.SetActive(false);
+        }
+
         if (invincible)
             return;
 
