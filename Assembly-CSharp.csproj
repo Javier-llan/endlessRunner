@@ -51,7 +51,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CamaraFollow.cs" />
      <Compile Include="Assets\Scripts\ChangeLane.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Menu.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\RandomAnimation.cs" />
      <Compile Include="Assets\Scripts\Track.cs" />

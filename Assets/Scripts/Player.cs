@@ -31,6 +31,7 @@ public class Player : MonoBehaviour {
     static int blinkingValue;
     private UIManager uiManager;
     private int coins;
+    private float score;
 
     // Use this for initialization
     void Start()
@@ -49,7 +50,8 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+        score += Time.deltaTime * speed;
+        uiManager.UpdateScore((int)(score));
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             ChangeLane(-1);
@@ -159,9 +161,13 @@ public class Player : MonoBehaviour {
             uiManager.UpdateLives(currentLife);
             anim.SetTrigger("Hit");
             speed = 0;
+            
             if (currentLife <= 0)
             {
-                //game over
+                speed = 0;
+                anim.SetBool("Dead", true);
+                uiManager.gameOverPanel.SetActive(true);
+                Invoke("CallMenu",2f);
             }
             else
             {
@@ -198,5 +204,17 @@ public class Player : MonoBehaviour {
         model.SetActive(true);
         //Shader.SetGlobalFloat(blinkingValue, 0);
         invincible = false;
+    }
+
+    void CallMenu()
+    {
+        GameManager.gm.EndRun();
+    }
+
+    public void IncreaseSpeed()
+    {
+        speed *= 1.15f;
+        if (speed >= maxSpeed)
+            speed = maxSpeed;
     }
 }

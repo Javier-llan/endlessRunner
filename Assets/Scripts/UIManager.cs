@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour {
 
     public Image[] lifeHearts;
     public Text cointText;
+    public GameObject gameOverPanel;
+    public Text scoreText;
 
 	public void UpdateLives(int lives)
     {
@@ -26,5 +28,10 @@ public class UIManager : MonoBehaviour {
     public void UpdateCoins(int coin)
     {
         cointText.text = coin.ToString();
+    }
+
+    public void UpdateScore(float score)
+    {
+        scoreText.text = "Score: "+score+"m";
     }
 }
